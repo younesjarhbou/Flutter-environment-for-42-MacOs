@@ -1,3 +1,9 @@
+# Load Homebrew config script
+source $HOME/.brewconfig.zsh
+
+alias cclean='bash ~/Cleaner_42.sh'
+
+
 cd ~/goinfre/
 export PATH="$PATH:`pwd`/flutter/bin"
 export JAVA_HOME=/Users/yjarhbou/goinfre/javaJDK/Contents/Home
@@ -46,6 +52,24 @@ fi
     mkdir ~/goinfre/Google
     ln -s ~/goinfre/Google/ ~/Library/Caches
 	fi
+
+
+	# Check if Dart is installed and get the current version
+dart_version=$(dart --version 2>&1)
+desired_version="2.19.5"
+
+# Function to install Dart using Homebrew
+install_dart_with_brew() {
+    echo "Dart $desired_version not found. Installing with Homebrew..."
+    brew install dart
+}
+
+# Compare the current version with the desired version
+if [[ $dart_version == *"$desired_version"* ]]; then
+    echo "Dart $desired_version is already installed."
+else
+    install_dart_with_brew
+fi
 
 #zsh ~/Desktop/flutterScript.bash
 alias code="open -a Visual\ Studio\ Code"
